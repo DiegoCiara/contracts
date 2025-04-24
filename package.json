@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "cron": "^4.3.0",
     "fs-extra": "^11.3.0",
     "path": "^0.12.7",
     "pdf-lib": "^1.17.1",
