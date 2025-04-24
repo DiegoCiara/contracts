@@ -18,7 +18,7 @@ function generateContract(data, outputPath) {
   doc.lineGap(8);
 
   // Pipe para salvar o arquivo
-  doc.pipe(fs.createWriteStream(`./contracts/${filename}`));
+  doc.pipe(fs.createWriteStream(`./contracts/${outputPath}`));
 
   // Cabeçalho
   doc.fontSize(14).font('bold').text('CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE DESENVOLVIMENTO DE SOFTWARE', {
@@ -85,7 +85,7 @@ function generateContract(data, outputPath) {
   // Finaliza o documento
   doc.end();
 
-  console.log(`Contrato gerado com sucesso: ${filename}`);
+  console.log(`Contrato gerado com sucesso: ${outputPath}`);
 }
 
 // Uso
