@@ -28,8 +28,8 @@ async function generateContract(data, outputPath) {
 
 
   // Configurações de fonte e formatação
-  doc.registerFont('bold', `${baseUrl}/fonts/OpenSans-Bold.ttf`);
-  doc.registerFont('medium', `${baseUrl}/fonts/OpenSans-Medium.ttf`);
+  doc.registerFont('bold', `./fonts/OpenSans-Bold.ttf`);
+  doc.registerFont('medium', `./fonts/OpenSans-Medium.ttf`);
 
   doc.fontSize(12);
   doc.lineGap(8);
