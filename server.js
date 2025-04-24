@@ -25,7 +25,7 @@ const server = http.createServer((req, res) => {
     let body = '';
     req.on('data', chunk => body += chunk);
     req.on('end', () => {
-      alert('Dados recebidos:', body);
+      // alert('Dados recebidos:', body);
       const dados = JSON.parse(body);
       const conteudo = `const data = ${JSON.stringify(dados, null, 2)};\nmodule.exports = data;`;
       fs.writeFileSync('./data.js', conteudo);

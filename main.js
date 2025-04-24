@@ -27,9 +27,9 @@ async function generateContract(data, outputPath) {
   });
 
 
-  // Configurações de fonte e formatação
-  doc.registerFont('bold', `public/fonts/OpenSans-Bold.ttf`);
-  doc.registerFont('medium', `public/fonts/OpenSans-Medium.ttf`);
+  // // Configurações de fonte e formatação
+  // doc.registerFont('bold', `public/fonts/OpenSans-Bold.ttf`);
+  // doc.registerFont('medium', `public/fonts/OpenSans-Medium.ttf`);
 
   doc.fontSize(12);
   doc.lineGap(8);
@@ -105,30 +105,30 @@ async function generateContract(data, outputPath) {
   console.log(`Contrato gerado com sucesso: ${outputPath}`);
 }
 
-async function downloadFonts() {
-  const fonts = [
-    {
-      name: 'OpenSans-Bold.ttf',
-      url: 'https://fonts.gstatic.com/s/opensans/v34/mem5YaGs126MiZpBA-UN_r8OUuhs.ttf'
-    },
-    {
-      name: 'OpenSans-Medium.ttf',
-      url: 'https://fonts.gstatic.com/s/opensans/v34/mem5YaGs126MiZpBA-UNirkOUuhs.ttf'
-    }
-  ];
+// async function downloadFonts() {
+//   const fonts = [
+//     {
+//       name: 'OpenSans-Bold.ttf',
+//       url: 'https://fonts.gstatic.com/s/opensans/v34/mem5YaGs126MiZpBA-UN_r8OUuhs.ttf'
+//     },
+//     {
+//       name: 'OpenSans-Medium.ttf',
+//       url: 'https://fonts.gstatic.com/s/opensans/v34/mem5YaGs126MiZpBA-UNirkOUuhs.ttf'
+//     }
+//   ];
 
-  for (const font of fonts) {
-    try {
-      const buffer = await fetchFontBuffer(font.url);
-      fs.writeFileSync(`public/fonts/${font.name}`, buffer);
-      console.log(`Fonte salva: ${font.name}`);
-    } catch (err) {
-      console.error(`Erro ao baixar ${font.name}:`, err.message);
-    }
-  }
-}
+//   for (const font of fonts) {
+//     try {
+//       const buffer = await fetchFontBuffer(font.url);
+//       fs.writeFileSync(`public/fonts/${font.name}`, buffer);
+//       console.log(`Fonte salva: ${font.name}`);
+//     } catch (err) {
+//       console.error(`Erro ao baixar ${font.name}:`, err.message);
+//     }
+//   }
+// }
 
-downloadFonts();
+// downloadFonts();
 
 // Uso
 module.exports = generateContract;
