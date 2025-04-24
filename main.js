@@ -8,11 +8,14 @@ const baseUrl = 'https://contracts-chi.vercel.app/'; // URL base para os arquivo
 function fetchFontBuffer(url) {
   return new Promise((resolve, reject) => {
     https.get(url, (res) => {
-      const data = [];
-      res.on('data', chunk => data.push(chunk));
-      res.on('end', () => resolve(Buffer.concat(data)));
-      res.on('error', reject);
-    });
+      if (res.statusCode !== 200) {
+        return reject(new Error(`Falha ao baixar fonte: ${res.statusCode}`));
+      }
+
+      const chunks = [];
+      res.on('data', chunk => chunks.push(chunk));
+      res.on('end', () => resolve(Buffer.concat(chunks)));
+    }).on('error', reject);
   });
 }
 // Função para gerar o contrato
