@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerar Contrato</title>
+</head>
+<body>
+  <h1>Gerar Contrato</h1>
+  <form id="formulario">
+    <h2>Dados do Contratante</h2>
+    <input name="contratante.razaoSocial" placeholder="Razão Social" required><br>
+    <input name="contratante.cnpj" placeholder="CNPJ" required><br>
+    <input name="contratante.endereco" placeholder="Endereço" required><br>
+    <input name="contratante.representante" placeholder="Representante" required><br>
+    <input name="contratante.cpf" placeholder="CPF Representante" required><br>
+
+    <h2>Dados do Contratado</h2>
+    <input name="contratado.nome" placeholder="Nome" required><br>
+    <input name="contratado.cpf" placeholder="CPF" required><br>
+    <input name="contratado.endereco" placeholder="Endereço" required><br>
+    <input name="contratado.email" placeholder="Email" required><br>
+
+    <h2>Detalhes do Projeto</h2>
+    <input name="detalhes.nomeProjeto" placeholder="Nome do Projeto" required><br>
+    <input name="detalhes.valorTotal" placeholder="Valor Total" required><br>
+    <input name="detalhes.valorPorExtenso" placeholder="Valor por Extenso" required><br>
+    <input name="detalhes.valorHora" placeholder="Valor Hora" required><br>
+    <input name="detalhes.valorHoraPorExtenso" placeholder="Valor Hora por Extenso" required><br>
+    <input name="detalhes.totalHoras" placeholder="Total de Horas" required><br>
+    <input name="detalhes.horasPorExtenso" placeholder="Horas por Extenso" required><br>
+    <input name="detalhes.numeroParcelas" placeholder="Número de Parcelas" required><br>
+    <input name="detalhes.parcelasPorExtenso" placeholder="Parcelas por Extenso" required><br>
+    <input name="detalhes.valorParcela" placeholder="Valor da Parcela" required><br>
+    <input name="detalhes.valorParcelaPorExtenso" placeholder="Valor Parcela por Extenso" required><br>
+    <input name="detalhes.diaVencimento" placeholder="Dia de Vencimento" required><br>
+    <input name="detalhes.dataPrimeiroVencimento" placeholder="Data Primeiro Vencimento" required><br>
+    <input name="detalhes.prazoEntrega" placeholder="Prazo de Entrega" required><br>
+
+    <h2>Dados de Pagamento</h2>
+    <input name="detalhes.dadosPagamento.pix" placeholder="Chave Pix" required><br>
+    <input name="detalhes.dadosPagamento.banco" placeholder="Banco" required><br>
+    <input name="detalhes.dadosPagamento.codigoBanco" placeholder="Código do Banco" required><br>
+    <input name="detalhes.dadosPagamento.titular" placeholder="Titular da Conta" required><br>
+
+    <input name="detalhes.localForo" placeholder="Local do Foro" required><br><br>
+
+    <button type="submit">Gerar Contrato</button>
+  </form>
+
+  <script>
+    document.getElementById('formulario').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = {
+        contratante: {
+          razaoSocial: formData.get("contratante.razaoSocial"),
+          cnpj: formData.get("contratante.cnpj"),
+          endereco: formData.get("contratante.endereco"),
+          representante: formData.get("contratante.representante"),
+          cpf: formData.get("contratante.cpf")
+        },
+        contratado: {
+          nome: formData.get("contratado.nome"),
+          cpf: formData.get("contratado.cpf"),
+          endereco: formData.get("contratado.endereco"),
+          email: formData.get("contratado.email")
+        },
+        detalhes: {
+          nomeProjeto: formData.get("detalhes.nomeProjeto"),
+          valorTotal: formData.get("detalhes.valorTotal"),
+          valorPorExtenso: formData.get("detalhes.valorPorExtenso"),
+          valorHora: formData.get("detalhes.valorHora"),
+          valorHoraPorExtenso: formData.get("detalhes.valorHoraPorExtenso"),
+          totalHoras: Number(formData.get("detalhes.totalHoras")),
+          horasPorExtenso: formData.get("detalhes.horasPorExtenso"),
+          numeroParcelas: Number(formData.get("detalhes.numeroParcelas")),
+          parcelasPorExtenso: formData.get("detalhes.parcelasPorExtenso"),
+          valorParcela: formData.get("detalhes.valorParcela"),
+          valorParcelaPorExtenso: formData.get("detalhes.valorParcelaPorExtenso"),
+          diaVencimento: formData.get("detalhes.diaVencimento"),
+          dataPrimeiroVencimento: formData.get("detalhes.dataPrimeiroVencimento"),
+          prazoEntrega: formData.get("detalhes.prazoEntrega"),
+          dadosPagamento: {
+            pix: formData.get("detalhes.dadosPagamento.pix"),
+            banco: formData.get("detalhes.dadosPagamento.banco"),
+            codigoBanco: formData.get("detalhes.dadosPagamento.codigoBanco"),
+            titular: formData.get("detalhes.dadosPagamento.titular")
+          },
+          localForo: formData.get("detalhes.localForo")
+        }
+      };
+
+      const res = await fetch('/gerar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (res.ok) {
+        const blob = await res.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Contrato.pdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+      } else {
+        alert('Erro ao gerar contrato');
+      }
+    });
+  </script>
+</body>
+</html>
