@@ -3,7 +3,7 @@ const PDFDocument = require('pdfkit');
 const data = require('./data'); // Importando os dados do contrato de um arquivo JSON
 const https = require('https');
 
-const baseUrl = 'https://contracts-chi.vercel.app/'; // URL base para os arquivos de fonte
+const baseUrl = 'https://contracts-chi.vercel.app'; // URL base para os arquivos de fonte
 
 // function fetchFontBuffer(url) {
 //   return new Promise((resolve, reject) => {
