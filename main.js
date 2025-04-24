@@ -1,19 +1,35 @@
 const fs = require('fs');
 const PDFDocument = require('pdfkit');
 const data = require('./data'); // Importando os dados do contrato de um arquivo JSON
+const https = require('https');
 
+const baseUrl = 'https://contracts-chi.vercel.app/'; // URL base para os arquivos de fonte
 
+function fetchFontBuffer(url) {
+  return new Promise((resolve, reject) => {
+    https.get(url, (res) => {
+      const data = [];
+      res.on('data', chunk => data.push(chunk));
+      res.on('end', () => resolve(Buffer.concat(data)));
+      res.on('error', reject);
+    });
+  });
+}
 // Função para gerar o contrato
 
-function generateContract(data, outputPath) {
+async function generateContract(data, outputPath) {
     const doc = new PDFDocument({
     size: 'A4',
     margins: { top: 50, bottom: 50, left: 50, right: 50 }
   });
 
+  const boldFont = await fetchFontBuffer(`${baseUrl}/fonts/OpenSans-Bold.ttf`);
+  const mediumFont = await fetchFontBuffer(`${baseUrl}/fonts/OpenSans-Medium.ttf`);
+
   // Configurações de fonte e formatação
-  doc.registerFont('bold', './OpenSans-Bold.ttf');
-  doc.registerFont('medium', './OpenSans-Medium.ttf');
+  doc.registerFont('bold', boldFont);
+  doc.registerFont('medium', mediumFont);
+
   doc.fontSize(12);
   doc.lineGap(8);
 
