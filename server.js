@@ -9,6 +9,7 @@ function serveStaticFile(res, filepath, contentType, statusCode = 200) {
   fs.readFile(filepath, (err, data) => {
     if (err) {
       res.writeHead(500);
+      console.error(`Erro ao ler o arquivo ${filepath}:`, err);
       res.end('Erro interno');
     } else {
       res.writeHead(statusCode, { 'Content-Type': contentType });
@@ -24,6 +25,7 @@ const server = http.createServer((req, res) => {
     let body = '';
     req.on('data', chunk => body += chunk);
     req.on('end', () => {
+      alert('Dados recebidos:', body);
       const dados = JSON.parse(body);
       const conteudo = `const data = ${JSON.stringify(dados, null, 2)};\nmodule.exports = data;`;
       fs.writeFileSync('./data.js', conteudo);

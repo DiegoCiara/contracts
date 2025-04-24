@@ -1,39 +1,39 @@
 const data = {
   "contratante": {
-    "razaoSocial": "ROa",
-    "cnpj": "03230220",
-    "endereco": "0302320",
-    "representante": "23020300",
-    "cpf": "230203"
+    "razaoSocial": "e",
+    "cnpj": "a",
+    "endereco": "a",
+    "representante": "a",
+    "cpf": "a"
   },
   "contratado": {
-    "nome": "2302030",
-    "cpf": "023020",
-    "endereco": "023030",
-    "email": "2302023"
+    "nome": "Diego Antonio da Silva",
+    "cpf": "116.215.844-10",
+    "endereco": "Rua Oscar Mariano, 75, Nossa Senhora das Dores, Caruaru - PE",
+    "email": "diegociara.dev@gmail.com"
   },
   "detalhes": {
-    "nomeProjeto": "3",
-    "valorTotal": "32",
-    "valorPorExtenso": "030203032030",
-    "valorHora": "30",
-    "valorHoraPorExtenso": "3",
-    "totalHoras": 230203023,
-    "horasPorExtenso": "030",
-    "numeroParcelas": 0,
-    "parcelasPorExtenso": "300",
-    "valorParcela": "3003",
-    "valorParcelaPorExtenso": "20",
-    "diaVencimento": "30",
-    "dataPrimeiroVencimento": "30",
-    "prazoEntrega": "0230",
+    "nomeProjeto": "Sistema de Gestão de Consignados",
+    "valorTotal": "23.000,00",
+    "valorPorExtenso": "sete mil e oitocentos reais",
+    "valorHora": "43,00",
+    "valorHoraPorExtenso": "quarenta e três reais",
+    "totalHoras": 176,
+    "horasPorExtenso": "cento e setenta e seis",
+    "numeroParcelas": 4,
+    "parcelasPorExtenso": "quatro",
+    "valorParcela": "1.950,00",
+    "valorParcelaPorExtenso": "mil novecentos e cinquenta reais",
+    "diaVencimento": "quartas-feiras",
+    "dataPrimeiroVencimento": "22 de abril de 2025",
+    "prazoEntrega": "45 (quarenta e cinco) dias corridos",
     "dadosPagamento": {
-      "pix": "023",
-      "banco": "30",
-      "codigoBanco": "230",
-      "titular": "30"
+      "pix": "116.215.844-10",
+      "banco": "Banco Santander",
+      "codigoBanco": "033",
+      "titular": "Diego Antonio da Silva"
     },
-    "localForo": "0"
+    "localForo": "a"
   }
 };
 module.exports = data;

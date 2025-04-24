@@ -1,162 +1,309 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Gerar Contrato</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      background-color: #f4f4f4;
-    }
-
-    h1 {
-      text-align: center;
-    }
-
-    form {
-      background: white;
-      padding: 20px;
-      max-width: 700px;
-      margin: auto;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-      margin-top: 30px;
-      color: #333;
-    }
-
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      box-sizing: border-box;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    button {
-      background-color: #007bff;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-      margin-top: 20px;
-    }
-
-    button:hover {
-      background-color: #0056b3;
-    }
-  </style>
-</head>
-<body>
-  <h1>Gerar Contrato</h1>
-  <form id="formulario">
-    <h2>Dados do Contratante</h2>
-    <input name="contratante.razaoSocial" placeholder="Razão Social" required><br>
-    <input name="contratante.cnpj" placeholder="CNPJ" required><br>
-    <input name="contratante.endereco" placeholder="Endereço" required><br>
-    <input name="contratante.representante" placeholder="Representante" required><br>
-    <input name="contratante.cpf" placeholder="CPF Representante" required><br>
-
-    <h2>Dados do Contratado</h2>
-    <input name="contratado.nome" placeholder="Nome" required><br>
-    <input name="contratado.cpf" placeholder="CPF" required><br>
-    <input name="contratado.endereco" placeholder="Endereço" required><br>
-    <input name="contratado.email" placeholder="Email" required><br>
-
-    <h2>Detalhes do Projeto</h2>
-    <input name="detalhes.nomeProjeto" placeholder="Nome do Projeto" required><br>
-    <input name="detalhes.valorTotal" placeholder="Valor Total" required><br>
-    <input name="detalhes.valorPorExtenso" placeholder="Valor por Extenso" required><br>
-    <input name="detalhes.valorHora" placeholder="Valor Hora" required><br>
-    <input name="detalhes.valorHoraPorExtenso" placeholder="Valor Hora por Extenso" required><br>
-    <input name="detalhes.totalHoras" placeholder="Total de Horas" required><br>
-    <input name="detalhes.horasPorExtenso" placeholder="Horas por Extenso" required><br>
-    <input name="detalhes.numeroParcelas" placeholder="Número de Parcelas" required><br>
-    <input name="detalhes.parcelasPorExtenso" placeholder="Parcelas por Extenso" required><br>
-    <input name="detalhes.valorParcela" placeholder="Valor da Parcela" required><br>
-    <input name="detalhes.valorParcelaPorExtenso" placeholder="Valor Parcela por Extenso" required><br>
-    <input name="detalhes.diaVencimento" placeholder="Dia de Vencimento" required><br>
-    <input name="detalhes.dataPrimeiroVencimento" placeholder="Data Primeiro Vencimento" required><br>
-    <input name="detalhes.prazoEntrega" placeholder="Prazo de Entrega" required><br>
-
-    <h2>Dados de Pagamento</h2>
-    <input name="detalhes.dadosPagamento.pix" placeholder="Chave Pix" required><br>
-    <input name="detalhes.dadosPagamento.banco" placeholder="Banco" required><br>
-    <input name="detalhes.dadosPagamento.codigoBanco" placeholder="Código do Banco" required><br>
-    <input name="detalhes.dadosPagamento.titular" placeholder="Titular da Conta" required><br>
-
-    <input name="detalhes.localForo" placeholder="Local do Foro" required><br><br>
-
-    <button type="submit">Gerar Contrato</button>
-  </form>
-
-  <script>
-    document.getElementById('formulario').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      const data = {
-        contratante: {
-          razaoSocial: formData.get("contratante.razaoSocial"),
-          cnpj: formData.get("contratante.cnpj"),
-          endereco: formData.get("contratante.endereco"),
-          representante: formData.get("contratante.representante"),
-          cpf: formData.get("contratante.cpf")
-        },
-        contratado: {
-          nome: formData.get("contratado.nome"),
-          cpf: formData.get("contratado.cpf"),
-          endereco: formData.get("contratado.endereco"),
-          email: formData.get("contratado.email")
-        },
-        detalhes: {
-          nomeProjeto: formData.get("detalhes.nomeProjeto"),
-          valorTotal: formData.get("detalhes.valorTotal"),
-          valorPorExtenso: formData.get("detalhes.valorPorExtenso"),
-          valorHora: formData.get("detalhes.valorHora"),
-          valorHoraPorExtenso: formData.get("detalhes.valorHoraPorExtenso"),
-          totalHoras: Number(formData.get("detalhes.totalHoras")),
-          horasPorExtenso: formData.get("detalhes.horasPorExtenso"),
-          numeroParcelas: Number(formData.get("detalhes.numeroParcelas")),
-          parcelasPorExtenso: formData.get("detalhes.parcelasPorExtenso"),
-          valorParcela: formData.get("detalhes.valorParcela"),
-          valorParcelaPorExtenso: formData.get("detalhes.valorParcelaPorExtenso"),
-          diaVencimento: formData.get("detalhes.diaVencimento"),
-          dataPrimeiroVencimento: formData.get("detalhes.dataPrimeiroVencimento"),
-          prazoEntrega: formData.get("detalhes.prazoEntrega"),
-          dadosPagamento: {
-            pix: formData.get("detalhes.dadosPagamento.pix"),
-            banco: formData.get("detalhes.dadosPagamento.banco"),
-            codigoBanco: formData.get("detalhes.dadosPagamento.codigoBanco"),
-            titular: formData.get("detalhes.dadosPagamento.titular")
-          },
-          localForo: formData.get("detalhes.localForo")
-        }
-      };
-
-      const res = await fetch('/gerar', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-
-      if (res.ok) {
-        const blob = await res.blob();
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'Contrato.pdf';
-        a.click();
-        window.URL.revokeObjectURL(url);
-      } else {
-        alert('Erro ao gerar contrato');
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gerar Contrato</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        background-color: #f4f4f4;
       }
-    });
-  </script>
-</body>
+
+      h1 {
+        text-align: center;
+      }
+
+      form {
+        background: white;
+        padding: 20px;
+        max-width: 700px;
+        margin: auto;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        margin-top: 30px;
+        color: #333;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      button {
+        background-color: #007bff;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 20px;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Gerar Contrato</h1>
+    <form id="formulario">
+      <h2>Dados do Contratante</h2>
+      <input
+        name="contratante.razaoSocial"
+        placeholder="Razão Social (ex: Rocha Consignado)"
+        required
+      /><br />
+      <input
+        name="contratante.cnpj"
+        placeholder="CNPJ (ex: 48.623.232/0001-22)"
+        required
+      /><br />
+      <input
+        name="contratante.endereco"
+        placeholder="Endereço (ex: Rua Ico, 31, Vila Matilde)"
+        required
+      /><br />
+      <input
+        name="contratante.representante"
+        placeholder="Representante (ex: Marcelly Gomes da Rocha)"
+        required
+      /><br />
+      <input
+        name="contratante.cpf"
+        placeholder="CPF Representante (ex: 389.509.568-02)"
+        required
+      /><br />
+
+      <h2>Dados do Contratado</h2>
+      <input
+        name="contratado.nome"
+        placeholder="Nome (ex: Diego Antonio da Silva)"
+        required
+        value="Diego Antonio da Silva"
+      /><br />
+      <input
+        name="contratado.cpf"
+        placeholder="CPF (ex: 116.215.844-10)"
+        required
+        value="116.215.844-10"
+      /><br />
+      <input
+        name="contratado.endereco"
+        placeholder="Endereço (ex: Rua Oscar Mariano, 75, Nossa Senhora das Dores, Caruaru - PE)"
+        required
+        value="Rua Oscar Mariano, 75, Nossa Senhora das Dores, Caruaru - PE"
+      /><br />
+      <input
+        name="contratado.email"
+        placeholder="Email (ex: diegociara.dev@gmail.com)"
+        required
+        value="diegociara.dev@gmail.com"
+      /><br />
+
+      <h2>Detalhes do Projeto</h2>
+      <input
+        name="detalhes.nomeProjeto"
+        placeholder="Nome do Projeto (ex: Sistema de Gestão de Consignados)"
+        required
+        value="Sistema de Gestão de Consignados"
+      /><br />
+      <input
+        name="detalhes.valorTotal"
+        placeholder="Valor Total (ex: 23.000,00)"
+        required
+        value="23.000,00"
+      /><br />
+      <input
+        name="detalhes.valorPorExtenso"
+        placeholder="Valor por Extenso (ex: vinte e três mil reais)"
+        required
+        value="sete mil e oitocentos reais"
+      /><br />
+      <input
+        name="detalhes.valorHora"
+        placeholder="Valor Hora (ex: 43,00)"
+        required
+        value="43,00"
+      /><br />
+      <input
+        name="detalhes.valorHoraPorExtenso"
+        placeholder="Valor Hora por Extenso (ex: quarenta e três reais)"
+        required
+        value="quarenta e três reais"
+      /><br />
+      <input
+        name="detalhes.totalHoras"
+        placeholder="Total de Horas (ex: 176)"
+        required
+        value="176"
+      /><br />
+      <input
+        name="detalhes.horasPorExtenso"
+        placeholder="Horas por Extenso (ex: cento e setenta e seis)"
+        required
+        value="cento e setenta e seis"
+      /><br />
+      <input
+        name="detalhes.numeroParcelas"
+        placeholder="Número de Parcelas (ex: 4)"
+        required
+        value="4"
+      /><br />
+      <input
+        name="detalhes.parcelasPorExtenso"
+        placeholder="Parcelas por Extenso (ex: quatro)"
+        required
+        value="quatro"
+      /><br />
+      <input
+        name="detalhes.valorParcela"
+        placeholder="Valor da Parcela (ex: 1.950,00)"
+        required
+        value="1.950,00"
+      /><br />
+      <input
+        name="detalhes.valorParcelaPorExtenso"
+        placeholder="Valor Parcela por Extenso (ex: mil novecentos e cinquenta reais)"
+        required
+        value="mil novecentos e cinquenta reais"
+      /><br />
+      <input
+        name="detalhes.diaVencimento"
+        placeholder="Dia de Vencimento (ex: quartas-feiras)"
+        required
+        value="quartas-feiras"
+      /><br />
+      <input
+        name="detalhes.dataPrimeiroVencimento"
+        placeholder="Data Primeiro Vencimento (ex: 22 de abril de 2025)"
+        required
+        value="22 de abril de 2025"
+      /><br />
+      <input
+        name="detalhes.prazoEntrega"
+        placeholder="Prazo de Entrega (ex: 45 dias corridos)"
+        required
+        value="45 (quarenta e cinco) dias corridos"
+      /><br />
+
+      <h2>Dados de Pagamento</h2>
+      <input
+        name="detalhes.dadosPagamento.pix"
+        placeholder="Chave Pix (ex: 116.215.844-10)"
+        required
+        value="116.215.844-10"
+      /><br />
+      <input
+        name="detalhes.dadosPagamento.banco"
+        placeholder="Banco (ex: Banco Santander)"
+        required
+        value="Banco Santander"
+      /><br />
+      <input
+        name="detalhes.dadosPagamento.codigoBanco"
+        placeholder="Código do Banco (ex: 033)"
+        required
+        value="033"
+      /><br />
+      <input
+        name="detalhes.dadosPagamento.titular"
+        placeholder="Titular da Conta (ex: Diego Antonio da Silva)"
+        required
+        value="Diego Antonio da Silva"
+      /><br />
+
+      <input
+        name="detalhes.localForo"
+        placeholder="Local do Foro (ex: Caruaru - PE)"
+        required
+      /><br /><br />
+
+      <button type="submit">Gerar Contrato</button>
+    </form>
+
+    <script>
+      document
+        .getElementById('formulario')
+        .addEventListener('submit', async (e) => {
+          e.preventDefault();
+          try {
+            const formData = new FormData(e.target);
+            const data = {
+              contratante: {
+                razaoSocial: formData.get('contratante.razaoSocial'),
+                cnpj: formData.get('contratante.cnpj'),
+                endereco: formData.get('contratante.endereco'),
+                representante: formData.get('contratante.representante'),
+                cpf: formData.get('contratante.cpf'),
+              },
+              contratado: {
+                nome: formData.get('contratado.nome'),
+                cpf: formData.get('contratado.cpf'),
+                endereco: formData.get('contratado.endereco'),
+                email: formData.get('contratado.email'),
+              },
+              detalhes: {
+                nomeProjeto: formData.get('detalhes.nomeProjeto'),
+                valorTotal: formData.get('detalhes.valorTotal'),
+                valorPorExtenso: formData.get('detalhes.valorPorExtenso'),
+                valorHora: formData.get('detalhes.valorHora'),
+                valorHoraPorExtenso: formData.get(
+                  'detalhes.valorHoraPorExtenso',
+                ),
+                totalHoras: Number(formData.get('detalhes.totalHoras')),
+                horasPorExtenso: formData.get('detalhes.horasPorExtenso'),
+                numeroParcelas: Number(formData.get('detalhes.numeroParcelas')),
+                parcelasPorExtenso: formData.get('detalhes.parcelasPorExtenso'),
+                valorParcela: formData.get('detalhes.valorParcela'),
+                valorParcelaPorExtenso: formData.get(
+                  'detalhes.valorParcelaPorExtenso',
+                ),
+                diaVencimento: formData.get('detalhes.diaVencimento'),
+                dataPrimeiroVencimento: formData.get(
+                  'detalhes.dataPrimeiroVencimento',
+                ),
+                prazoEntrega: formData.get('detalhes.prazoEntrega'),
+                dadosPagamento: {
+                  pix: formData.get('detalhes.dadosPagamento.pix'),
+                  banco: formData.get('detalhes.dadosPagamento.banco'),
+                  codigoBanco: formData.get(
+                    'detalhes.dadosPagamento.codigoBanco',
+                  ),
+                  titular: formData.get('detalhes.dadosPagamento.titular'),
+                },
+                localForo: formData.get('detalhes.localForo'),
+              },
+            };
+
+            const res = await fetch('/gerar', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(data),
+            });
+
+            if (res.ok) {
+              const blob = await res.blob();
+              const url = window.URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = 'Contrato.pdf';
+              a.click();
+              window.URL.revokeObjectURL(url);
+            } 
+          } catch (error) {
+            console.error('Erro:', error);
+            alert('Erro ao gerar contrato');
+          }
+        });
+    </script>
+  </body>
 </html>
