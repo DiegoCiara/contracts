@@ -4,8 +4,9 @@ const data = require('./data'); // Importando os dados do contrato de um arquivo
 
 
 // Função para gerar o contrato
-function generateContract(data, filename) {
-  const doc = new PDFDocument({
+
+function generateContract(data, outputPath) {
+    const doc = new PDFDocument({
     size: 'A4',
     margins: { top: 50, bottom: 50, left: 50, right: 50 }
   });
@@ -88,4 +89,4 @@ function generateContract(data, filename) {
 }
 
 // Uso
-generateContract(data, `Contrato ${data.contratante.razaoSocial}: ${data.detalhes.nomeProjeto}.pdf`);
+module.exports = generateContract;

@@ -1,6 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-const { exec } = require('child_process');
+
+import fs from 'fs';
+import path from 'path';
+import generateContract from '../main'; // agora é importável
+import { tmpdir } from 'os';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -8,25 +10,21 @@ export default async function handler(req, res) {
   }
 
   const data = req.body;
-  const filename = `Contrato ${data.contratante.razaoSocial}: ${data.detalhes.nomeProjeto}.pdf`;
-  const filePath = path.join('/tmp', filename); // /tmp é o único caminho gravável em serverless
+  const filename = `Contrato - ${data.contratante.razaoSocial}.pdf`;
+  const filePath = path.join(tmpdir(), filename);
 
-  // Salva data.js temporariamente
-  fs.writeFileSync('/tmp/data.js', `const data = ${JSON.stringify(data, null, 2)};\nmodule.exports = data;`);
+  try {
+    await generateContract(data, filePath);
 
-  // Copia main.js para usar com data.js temporário
-  fs.copyFileSync(path.join(process.cwd(), 'main.js'), '/tmp/main.js');
+    // Aguarda o PDF terminar de ser escrito
+    await new Promise(resolve => setTimeout(resolve, 1500));
 
-  // Executa main.js via Node dentro do /tmp
-  exec(`node /tmp/main.js`, { cwd: '/tmp' }, (err) => {
-    if (err) {
-      return res.status(500).send(`Erro ao gerar contrato: ${err.message}`);
-    }
-    fs.readFile(filePath, (err, file) => {
-      if (err) return res.status(500).send('Erro ao ler o contrato');
-      res.setHeader('Content-Type', 'application/pdf');
-      res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
-      res.send(file);
-    });
-  });
+    const file = fs.readFileSync(filePath);
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.send(file);
+  } catch (err) {
+    console.error('Erro ao gerar contrato:', err);
+    res.status(500).send('Erro ao gerar contrato');
+  }
 }
