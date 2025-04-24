@@ -19,8 +19,9 @@ export default async function handler(req, res) {
 
   // Executa main.js via Node dentro do /tmp
   exec(`node /tmp/main.js`, { cwd: '/tmp' }, (err) => {
-    if (err) return res.status(500).send('Erro ao gerar contrato');
-
+    if (err) {
+      return res.status(500).send(`Erro ao gerar contrato: ${err.message}`);
+    }
     fs.readFile(filePath, (err, file) => {
       if (err) return res.status(500).send('Erro ao ler o contrato');
       res.setHeader('Content-Type', 'application/pdf');

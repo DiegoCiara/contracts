@@ -33,7 +33,7 @@ const server = http.createServer((req, res) => {
       exec('node main.js', (err) => {
         if (err) {
           res.writeHead(500);
-          return res.end('Erro ao gerar contrato');
+          return res.end(`Erro ao gerar contrato: ${err.message}`);
         }
 
         const filename = `Contrato ${dados.contratante.razaoSocial}: ${dados.detalhes.nomeProjeto}.pdf`;
