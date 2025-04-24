@@ -5,19 +5,19 @@ const https = require('https');
 
 const baseUrl = 'https://contracts-chi.vercel.app/public'; // URL base para os arquivos de fonte
 
-// function fetchFontBuffer(url) {
-//   return new Promise((resolve, reject) => {
-//     https.get(url, (res) => {
-//       if (res.statusCode !== 200) {
-//         return reject(new Error(`Falha ao baixar fonte: ${res.statusCode}`));
-//       }
+function fetchFontBuffer(url) {
+  return new Promise((resolve, reject) => {
+    https.get(url, (res) => {
+      if (res.statusCode !== 200) {
+        return reject(new Error(`Falha ao baixar fonte: ${res.statusCode}`));
+      }
 
-//       const chunks = [];
-//       res.on('data', chunk => chunks.push(chunk));
-//       res.on('end', () => resolve(Buffer.concat(chunks)));
-//     }).on('error', reject);
-//   });
-// }
+      const chunks = [];
+      res.on('data', chunk => chunks.push(chunk));
+      res.on('end', () => resolve(Buffer.concat(chunks)));
+    }).on('error', reject);
+  });
+}
 // Função para gerar o contrato
 
 async function generateContract(data, outputPath) {
@@ -104,6 +104,31 @@ async function generateContract(data, outputPath) {
 
   console.log(`Contrato gerado com sucesso: ${outputPath}`);
 }
+
+async function downloadFonts() {
+  const fonts = [
+    {
+      name: 'OpenSans-Bold.ttf',
+      url: 'https://fonts.gstatic.com/s/opensans/v34/mem5YaGs126MiZpBA-UN_r8OUuhs.ttf'
+    },
+    {
+      name: 'OpenSans-Medium.ttf',
+      url: 'https://fonts.gstatic.com/s/opensans/v34/mem5YaGs126MiZpBA-UNirkOUuhs.ttf'
+    }
+  ];
+
+  for (const font of fonts) {
+    try {
+      const buffer = await fetchFontBuffer(font.url);
+      fs.writeFileSync(`public/fonts/${font.name}`, buffer);
+      console.log(`Fonte salva: ${font.name}`);
+    } catch (err) {
+      console.error(`Erro ao baixar ${font.name}:`, err.message);
+    }
+  }
+}
+
+downloadFonts();
 
 // Uso
 module.exports = generateContract;
