@@ -1,41 +1,23 @@
 const fs = require('fs');
 const PDFDocument = require('pdfkit');
 const data = require('./data'); // Importando os dados do contrato de um arquivo JSON
-const https = require('https');
 
-const baseUrl = 'https://contracts-chi.vercel.app/public'; // URL base para os arquivos de fonte
 
-function fetchFontBuffer(url) {
-  return new Promise((resolve, reject) => {
-    https.get(url, (res) => {
-      if (res.statusCode !== 200) {
-        return reject(new Error(`Falha ao baixar fonte: ${res.statusCode}`));
-      }
-
-      const chunks = [];
-      res.on('data', chunk => chunks.push(chunk));
-      res.on('end', () => resolve(Buffer.concat(chunks)));
-    }).on('error', reject);
-  });
-}
 // Função para gerar o contrato
-
-async function generateContract(data, outputPath) {
-    const doc = new PDFDocument({
+function generateContract(data, filename) {
+  const doc = new PDFDocument({
     size: 'A4',
     margins: { top: 50, bottom: 50, left: 50, right: 50 }
   });
 
-
-  // // Configurações de fonte e formatação
-  // doc.registerFont('bold', `public/fonts/OpenSans-Bold.ttf`);
-  // doc.registerFont('medium', `public/fonts/OpenSans-Medium.ttf`);
-
+  // Configurações de fonte e formatação
+  doc.registerFont('bold', './public/fonts/OpenSans-Bold.ttf');
+  doc.registerFont('medium', './public/fonts/OpenSans-Medium.ttf');
   doc.fontSize(12);
   doc.lineGap(8);
 
   // Pipe para salvar o arquivo
-  doc.pipe(fs.createWriteStream(`./contracts/${outputPath}`));
+  doc.pipe(fs.createWriteStream(`./contracts/${filename}`));
 
   // Cabeçalho
   doc.fontSize(14).font('bold').text('CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE DESENVOLVIMENTO DE SOFTWARE', {
@@ -102,33 +84,8 @@ async function generateContract(data, outputPath) {
   // Finaliza o documento
   doc.end();
 
-  console.log(`Contrato gerado com sucesso: ${outputPath}`);
+  console.log(`Contrato gerado com sucesso: ${filename}`);
 }
 
-// async function downloadFonts() {
-//   const fonts = [
-//     {
-//       name: 'OpenSans-Bold.ttf',
-//       url: 'https://fonts.gstatic.com/s/opensans/v34/mem5YaGs126MiZpBA-UN_r8OUuhs.ttf'
-//     },
-//     {
-//       name: 'OpenSans-Medium.ttf',
-//       url: 'https://fonts.gstatic.com/s/opensans/v34/mem5YaGs126MiZpBA-UNirkOUuhs.ttf'
-//     }
-//   ];
-
-//   for (const font of fonts) {
-//     try {
-//       const buffer = await fetchFontBuffer(font.url);
-//       fs.writeFileSync(`public/fonts/${font.name}`, buffer);
-//       console.log(`Fonte salva: ${font.name}`);
-//     } catch (err) {
-//       console.error(`Erro ao baixar ${font.name}:`, err.message);
-//     }
-//   }
-// }
-
-// downloadFonts();
-
 // Uso
-module.exports = generateContract;
+generateContract(data, `Contrato ${data.contratante.razaoSocial}: ${data.detalhes.nomeProjeto}.pdf`);

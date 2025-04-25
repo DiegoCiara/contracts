@@ -21,11 +21,10 @@ function serveStaticFile(res, filepath, contentType, statusCode = 200) {
 const server = http.createServer((req, res) => {
   if (req.method === 'GET' && req.url === '/') {
     serveStaticFile(res, './public/index.html', 'text/html');
-  } else if (req.method === 'POST' && req.url === '/api/gerar') {
+  } else if (req.method === 'POST' && req.url === '/gerar') {
     let body = '';
     req.on('data', chunk => body += chunk);
     req.on('end', () => {
-      // alert('Dados recebidos:', body);
       const dados = JSON.parse(body);
       const conteudo = `const data = ${JSON.stringify(dados, null, 2)};\nmodule.exports = data;`;
       fs.writeFileSync('./data.js', conteudo);
@@ -33,7 +32,7 @@ const server = http.createServer((req, res) => {
       exec('node main.js', (err) => {
         if (err) {
           res.writeHead(500);
-          return res.end(`Erro ao gerar contrato: ${err.message}`);
+          return res.end('Erro ao gerar contrato');
         }
 
         const filename = `Contrato ${dados.contratante.razaoSocial}: ${dados.detalhes.nomeProjeto}.pdf`;

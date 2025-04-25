@@ -284,7 +284,7 @@
               },
             };
 
-            const res = await fetch('/api/gerar', {
+            const res = await fetch('/gerar', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(data),
@@ -295,13 +295,15 @@
               const url = window.URL.createObjectURL(blob);
               const a = document.createElement('a');
               a.href = url;
-              a.download = 'Contrato.pdf';
+              a.download = `Contrato ${data.contratante.razaoSocial}: ${data.detalhes.nomeProjeto}.pdf`;
               a.click();
               window.URL.revokeObjectURL(url);
+            } else {
+              alert('Erro ao gerar contrato', res.statusText);
             }
           } catch (error) {
             console.error('Erro:', error);
-            alert('Erro ao gerar contrato');
+            alert('Erro ao gerar contrato', error.message);
           }
         });
     </script>
