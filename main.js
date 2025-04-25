@@ -41,7 +41,7 @@ function generateContract(data, filename) {
   doc.font('bold').text(`CLÁUSULA 1 - DO OBJETO`, { underline: true }).moveDown();
   doc.font('medium').text(`O presente contrato tem como objeto a prestação de serviços de desenvolvimento de software conforme os requisitos especificados no Anexo I, denominado ${data.detalhes.nomeProjeto}.`).moveDown(2);
 
-  doc.font('bold').text(`CLÁUSULA 2 - DO PRAZO`, { underline: true }).moveDown();
+  doc.font('bold').text(`\n\n\nCLÁUSULA 2 - DO PRAZO`, { underline: true }).moveDown();
   doc.font('medium').text(`O prazo máximo para entrega do projeto é de ${data.detalhes.prazoEntrega}, contados a partir do início dos trabalhos.`).moveDown(2);
 
   doc.font('bold').text(`CLÁUSULA 3 - DO VALOR E FORMA DE PAGAMENTO`, { underline: true }).moveDown();
