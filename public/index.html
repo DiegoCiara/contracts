@@ -51,182 +51,347 @@
       button:hover {
         background-color: #0056b3;
       }
+
+      label {
+        display: block;
+        margin-top: 16px;
+        color: #666;
+        font-size: 13px;
+      }
+
+      .form-section {
+        margin-bottom: 30px;
+        border-radius: 8px;
+        background-color: #fff;
+      }
+
+      .form-section h2 {
+        margin-top: 0;
+        color: #000;
+      }
+
+      .flex-row {
+        display: flex;
+        gap: 20px;
+      }
+
+      .half-section {
+        flex: 1;
+      }
+
+      .row-2col {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 12px;
+      }
+
+      .input-col {
+        flex: 1;
+      }
+
+      #camposParcelamento {
+        display: none;
+      }
     </style>
   </head>
   <body>
     <h1>Gerar Contrato</h1>
     <form id="formulario">
-      <h2>Dados do Contratante</h2>
-      <input
-        name="contratante.razaoSocial"
-        placeholder="Razão Social (ex: Rocha Consignado)"
-        required
-      /><br />
-      <input
-        name="contratante.cnpj"
-        placeholder="CNPJ (ex: 48.623.232/0001-22)"
-        required
-      /><br />
-      <input
-        name="contratante.endereco"
-        placeholder="Endereço (ex: Rua Ico, 31, Vila Matilde)"
-        required
-      /><br />
-      <input
-        name="contratante.representante"
-        placeholder="Representante (ex: Marcelly Gomes da Rocha)"
-        required
-      /><br />
-      <input
-        name="contratante.cpf"
-        placeholder="CPF Representante (ex: 389.509.568-02)"
-        required
-      /><br />
+      <div class="form-section">
+        <h2>Dados do Contratante</h2>
+        <label for="razaoSocial">Razão Social</label>
+        <input
+          id="razaoSocial"
+          name="contratante.razaoSocial"
+          placeholder="ex: Rocha Consignado"
+          required
+        /><br />
+        <label for="cnpj">CNPJ</label>
+        <input
+          id="cnpj"
+          name="contratante.cnpj"
+          placeholder="ex: 48.623.232/0001-22"
+          required
+        /><br />
+        <label for="enderecoContratante">Endereço</label>
+        <input
+          id="enderecoContratante"
+          name="contratante.endereco"
+          placeholder="ex: Rua Ico, 31, Vila Matilde"
+          required
+        /><br />
+        <label for="representante">Representante</label>
+        <input
+          id="representante"
+          name="contratante.representante"
+          placeholder="ex: Marcelly Gomes da Rocha"
+          required
+        /><br />
+        <label for="cpfRepresentante">CPF Representante</label>
+        <input
+          id="cpfRepresentante"
+          name="contratante.cpf"
+          placeholder="ex: 389.509.568-02"
+          required
+        /><br />
+      </div>
+      <div class="form-section">
+        <h2>Orçamento do Projeto</h2>
+        <label for="nomeProjeto">Nome do Projeto</label>
+        <input
+          id="nomeProjeto"
+          name="detalhes.nomeProjeto"
+          placeholder="ex: Sistema de Gestão de Consignados"
+          required
+          value="Sistema de Gestão de Consignados"
+        /><br />
+        <div class="row-2col">
+          <div class="input-col">
+            <label for="valorHora">Valor Hora</label>
+            <input
+              id="valorHora"
+              name="detalhes.valorHora"
+              placeholder="ex: 43,00"
+              required
+              value="43,00"
+            />
+          </div>
+          <div class="input-col">
+            <label for="valorHoraPorExtenso">Valor Hora por Extenso</label>
+            <input
+              id="valorHoraPorExtenso"
+              name="detalhes.valorHoraPorExtenso"
+              placeholder="ex: quarenta e três reais"
+              required
+              value="quarenta e três reais"
+            />
+          </div>
+        </div>
 
-      <h2>Dados do Contratado</h2>
-      <input
-        name="contratado.nome"
-        placeholder="Nome (ex: Diego Antonio da Silva)"
-        required
-        value="Diego Antonio da Silva"
-      /><br />
-      <input
-        name="contratado.cpf"
-        placeholder="CPF (ex: 116.215.844-10)"
-        required
-        value="116.215.844-10"
-      /><br />
-      <input
-        name="contratado.endereco"
-        placeholder="Endereço (ex: Rua Oscar Mariano, 75, Nossa Senhora das Dores, Caruaru - PE)"
-        required
-        value="Rua Oscar Mariano, 75, Nossa Senhora das Dores, Caruaru - PE"
-      /><br />
-      <input
-        name="contratado.email"
-        placeholder="Email (ex: diegociara.dev@gmail.com)"
-        required
-        value="diegociara.dev@gmail.com"
-      /><br />
+        <div class="row-2col">
+          <div class="input-col">
+            <label for="totalHoras">Total de Horas</label>
+            <input
+              id="totalHoras"
+              name="detalhes.totalHoras"
+              placeholder="ex: 176"
+              required
+              value="176"
+            /><br />
+          </div>
+          <div class="input-col">
+            <label for="horasPorExtenso">Horas por Extenso</label>
+            <input
+              id="horasPorExtenso"
+              name="detalhes.horasPorExtenso"
+              placeholder="ex: cento e setenta e seis"
+              required
+              value="cento e setenta e seis"
+            /><br />
+          </div>
+        </div>
+        <div class="row-2col">
+          <div class="input-col">
+            <label for="valorTotal">Valor Total</label>
+            <input
+              id="valorTotal"
+              name="detalhes.valorTotal"
+              placeholder="ex: 23.000,00"
+              required
+              value="23.000,00"
+            />
+            <div
+              id="extensoValorTotal"
+              style="margin-bottom: 10px; color: #555"
+            ></div>
+          </div>
+          <div class="input-col">
+            <label for="valorPorExtenso">Valor por Extenso</label>
+            <input
+              id="valorPorExtenso"
+              name="detalhes.valorPorExtenso"
+              placeholder="ex: vinte e três mil reais"
+              required
+              value="sete mil e oitocentos reais"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-section">
+        <h2>Prazos e Pagamento</h2>
+        <label for="prazoEntrega">Prazo de Entrega</label>
+        <input
+          id="prazoEntrega"
+          name="detalhes.prazoEntrega"
+          placeholder="ex: 45 dias corridos"
+          required
+          value="45 (quarenta e cinco) dias corridos"
+        /><br />  
+        <div
+          class="row-2col"
+          style="width: 100%; justify-content: start; align-items: center"
+        >
+          <input
+            type="checkbox"
+            id="parcelado"
+            name="detalhes.parcelado"
+            style="width: auto"
+          />
+          <span for="parcelado" style='font-size: x-small; color: #666;'> Pagamento parcelado? </span>
+        </div>
 
-      <h2>Detalhes do Projeto</h2>
-      <input
-        name="detalhes.nomeProjeto"
-        placeholder="Nome do Projeto (ex: Sistema de Gestão de Consignados)"
-        required
-        value="Sistema de Gestão de Consignados"
-      /><br />
-      <input
-        name="detalhes.valorTotal"
-        placeholder="Valor Total (ex: 23.000,00)"
-        required
-        value="23.000,00"
-      /><br />
-      <input
-        name="detalhes.valorPorExtenso"
-        placeholder="Valor por Extenso (ex: vinte e três mil reais)"
-        required
-        value="sete mil e oitocentos reais"
-      /><br />
-      <input
-        name="detalhes.valorHora"
-        placeholder="Valor Hora (ex: 43,00)"
-        required
-        value="43,00"
-      /><br />
-      <input
-        name="detalhes.valorHoraPorExtenso"
-        placeholder="Valor Hora por Extenso (ex: quarenta e três reais)"
-        required
-        value="quarenta e três reais"
-      /><br />
-      <input
-        name="detalhes.totalHoras"
-        placeholder="Total de Horas (ex: 176)"
-        required
-        value="176"
-      /><br />
-      <input
-        name="detalhes.horasPorExtenso"
-        placeholder="Horas por Extenso (ex: cento e setenta e seis)"
-        required
-        value="cento e setenta e seis"
-      /><br />
-      <input
-        name="detalhes.numeroParcelas"
-        placeholder="Número de Parcelas (ex: 4)"
-        required
-        value="4"
-      /><br />
-      <input
-        name="detalhes.parcelasPorExtenso"
-        placeholder="Parcelas por Extenso (ex: quatro)"
-        required
-        value="quatro"
-      /><br />
-      <input
-        name="detalhes.valorParcela"
-        placeholder="Valor da Parcela (ex: 1.950,00)"
-        required
-        value="1.950,00"
-      /><br />
-      <input
-        name="detalhes.valorParcelaPorExtenso"
-        placeholder="Valor Parcela por Extenso (ex: mil novecentos e cinquenta reais)"
-        required
-        value="mil novecentos e cinquenta reais"
-      /><br />
-      <input
-        name="detalhes.diaVencimento"
-        placeholder="Dia de Vencimento (ex: quartas-feiras)"
-        required
-        value="quartas-feiras"
-      /><br />
-      <input
-        name="detalhes.dataPrimeiroVencimento"
-        placeholder="Data Primeiro Vencimento (ex: 22 de abril de 2025)"
-        required
-        value="22 de abril de 2025"
-      /><br />
-      <input
-        name="detalhes.prazoEntrega"
-        placeholder="Prazo de Entrega (ex: 45 dias corridos)"
-        required
-        value="45 (quarenta e cinco) dias corridos"
-      /><br />
-
-      <h2>Dados de Pagamento</h2>
-      <input
-        name="detalhes.dadosPagamento.pix"
-        placeholder="Chave Pix (ex: 116.215.844-10)"
-        required
-        value="116.215.844-10"
-      /><br />
-      <input
-        name="detalhes.dadosPagamento.banco"
-        placeholder="Banco (ex: Banco Santander)"
-        required
-        value="Banco Santander"
-      /><br />
-      <input
-        name="detalhes.dadosPagamento.codigoBanco"
-        placeholder="Código do Banco (ex: 033)"
-        required
-        value="033"
-      /><br />
-      <input
-        name="detalhes.dadosPagamento.titular"
-        placeholder="Titular da Conta (ex: Diego Antonio da Silva)"
-        required
-        value="Diego Antonio da Silva"
-      /><br />
-
-      <input
-        name="detalhes.localForo"
-        placeholder="Local do Foro (ex: Caruaru - PE)"
-        required
-      /><br /><br />
-
+        <div id="camposParcelamento">
+          <div class="row-2col">
+            <div class="input-col">
+              <label for="valorParcela">Valor da Parcela</label>
+              <input
+                id="valorParcela"
+                name="detalhes.valorParcela"
+                placeholder="ex: 1.950,00"
+                required
+                value="1.950,00"
+              />
+            </div>
+            <div class="input-col">
+              <label for="valorParcelaPorExtenso"
+                >Valor Parcela por Extenso</label
+              >
+              <input
+                id="valorParcelaPorExtenso"
+                name="detalhes.valorParcelaPorExtenso"
+                placeholder="ex: mil novecentos e cinquenta reais"
+                required
+                value="mil novecentos e cinquenta reais"
+              />
+            </div>
+          </div>
+          <div class="row-2col">
+            <div class="input-col">
+              <label for="numeroParcelas">Número de Parcelas</label>
+              <input
+                id="numeroParcelas"
+                name="detalhes.numeroParcelas"
+                placeholder="ex: 4"
+                required
+              />
+            </div>
+            <div class="input-col">
+              <label for="parcelasPorExtenso">Parcelas por Extenso</label>
+              <input
+                id="parcelasPorExtenso"
+                name="detalhes.parcelasPorExtenso"
+                placeholder="ex: quatro"
+                required
+              />
+            </div>
+          </div>
+          <label for="tipoParcelamento">Tipo de Parcelamento</label>
+          <input
+            id="tipoParcelamento"
+            name="detalhes.tipoParcelamento"
+            placeholder="ex: mensal"
+          />
+          <label for="diaVencimento">Dia de Vencimento</label>
+          <input
+            id="diaVencimento"
+            name="detalhes.diaVencimento"
+            placeholder="ex: quartas-feiras"
+            required
+            value="quartas-feiras"
+          /><br />
+          <label for="dataPrimeiroVencimento">Data Primeiro Vencimento</label>
+          <input
+            id="dataPrimeiroVencimento"
+            name="detalhes.dataPrimeiroVencimento"
+            placeholder="ex: 22 de abril de 2025"
+            required
+            value="22 de abril de 2025"
+          /><br />
+        </div>
+      </div>
+      <div class="form-section flex-row">
+        <div class="form-section half-section">
+          <h2>Dados do Contratado</h2>
+          <label for="nomeContratado">Nome</label>
+          <input
+            id="nomeContratado"
+            name="contratado.nome"
+            placeholder="ex: Diego Antonio da Silva"
+            required
+            value="Diego Antonio da Silva"
+          /><br />
+          <label for="cpfContratado">CPF</label>
+          <input
+            id="cpfContratado"
+            name="contratado.cpf"
+            placeholder="ex: 116.215.844-10"
+            required
+            value="116.215.844-10"
+          /><br />
+          <label for="enderecoContratado">Endereço</label>
+          <input
+            id="enderecoContratado"
+            name="contratado.endereco"
+            placeholder="ex: Rua Oscar Mariano, 75, Nossa Senhora das Dores, Caruaru - PE"
+            required
+            value="Rua Oscar Mariano, 75, Nossa Senhora das Dores, Caruaru - PE"
+          /><br />
+          <label for="emailContratado">Email</label>
+          <input
+            id="emailContratado"
+            name="contratado.email"
+            placeholder="ex: diegociara.dev@gmail.com"
+            required
+            value="diegociara.dev@gmail.com"
+          /><br />
+        </div>
+        <div class="form-section half-section">
+          <h2>Dados de Pagamento</h2>
+          <label for="pix">Chave Pix</label>
+          <input
+            id="pix"
+            name="detalhes.dadosPagamento.pix"
+            placeholder="ex: 116.215.844-10"
+            required
+            value="116.215.844-10"
+          /><br />
+          <label for="banco">Banco</label>
+          <input
+            id="banco"
+            name="detalhes.dadosPagamento.banco"
+            placeholder="ex: Banco Santander"
+            required
+            value="Banco Santander"
+          /><br />
+          <label for="codigoBanco">Código do Banco</label>
+          <input
+            id="codigoBanco"
+            name="detalhes.dadosPagamento.codigoBanco"
+            placeholder="ex: 033"
+            required
+            value="033"
+          /><br />
+          <label for="titular">Titular da Conta</label>
+          <input
+            id="titular"
+            name="detalhes.dadosPagamento.titular"
+            placeholder="ex: Diego Antonio da Silva"
+            required
+            value="Diego Antonio da Silva"
+          /><br />
+        </div>
+      </div>
+      <div class="form-section">
+        <h2>Local do Foro</h2>
+        <label for="localForo">Local do Foro</label>
+        <input
+          id="localForo"
+          name="detalhes.localForo"
+          placeholder="ex: Caruaru - PE"
+          value="Caruaru - PE"
+          required
+        /><br />
+      </div>
       <button type="submit">Gerar Contrato</button>
     </form>
 
@@ -263,6 +428,8 @@
                 horasPorExtenso: formData.get('detalhes.horasPorExtenso'),
                 numeroParcelas: Number(formData.get('detalhes.numeroParcelas')),
                 parcelasPorExtenso: formData.get('detalhes.parcelasPorExtenso'),
+                parcelado: formData.get('detalhes.parcelado') === 'on',
+                tipoParcelamento: formData.get('detalhes.tipoParcelamento'),
                 valorParcela: formData.get('detalhes.valorParcela'),
                 valorParcelaPorExtenso: formData.get(
                   'detalhes.valorParcelaPorExtenso',
@@ -306,6 +473,63 @@
             alert('Erro ao gerar contrato', error.message);
           }
         });
+    </script>
+    <script>
+      function formatCurrency(value) {
+        return value.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+      }
+
+      function updateCalculations() {
+        const valorHoraInput = document.querySelector(
+          'input[name="detalhes.valorHora"]',
+        );
+        const totalHorasInput = document.querySelector(
+          'input[name="detalhes.totalHoras"]',
+        );
+        const numeroParcelasInput = document.querySelector(
+          'input[name="detalhes.numeroParcelas"]',
+        );
+        const valorTotalInput = document.querySelector(
+          'input[name="detalhes.valorTotal"]',
+        );
+        const valorParcelaInput = document.querySelector(
+          'input[name="detalhes.valorParcela"]',
+        );
+
+        const valorHora =
+          parseFloat(valorHoraInput.value.replace(',', '.')) || 0;
+        const totalHoras = parseInt(totalHorasInput.value) || 0;
+        const numeroParcelas = parseInt(numeroParcelasInput.value) || 1;
+
+        const valorTotal = valorHora * totalHoras;
+        const valorParcela = valorTotal / numeroParcelas;
+
+        valorTotalInput.value = formatCurrency(valorTotal);
+        valorParcelaInput.value = formatCurrency(valorParcela);
+
+        // Mostra por extenso nos placeholders visuais
+        document.getElementById(
+          'extensoValorTotal',
+        ).innerText = `${valorTotal.toFixed(2)} reais`;
+        document.getElementById(
+          'extensoValorParcela',
+        ).innerText = `${valorParcela.toFixed(2)} reais`;
+      }
+
+      document
+        .querySelector('input[name="detalhes.valorHora"]')
+        .addEventListener('input', updateCalculations);
+      document
+        .querySelector('input[name="detalhes.totalHoras"]')
+        .addEventListener('input', updateCalculations);
+      document
+        .querySelector('input[name="detalhes.numeroParcelas"]')
+        .addEventListener('input', updateCalculations);
+
+      document.getElementById('parcelado').addEventListener('change', function () {
+        const campos = document.getElementById('camposParcelamento');
+        campos.style.display = this.checked ? 'block' : 'none';
+      });
     </script>
   </body>
 </html>

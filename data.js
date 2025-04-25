@@ -1,10 +1,10 @@
 const data = {
   "contratante": {
-    "razaoSocial": "a",
-    "cnpj": "a",
-    "endereco": "a",
-    "representante": "a",
-    "cpf": "a"
+    "razaoSocial": "DIario",
+    "cnpj": "DIario",
+    "endereco": "DIario",
+    "representante": "DIario",
+    "cpf": "DIario"
   },
   "contratado": {
     "nome": "Diego Antonio da Silva",
@@ -14,7 +14,7 @@ const data = {
   },
   "detalhes": {
     "nomeProjeto": "Sistema de Gestão de Consignados",
-    "valorTotal": "23.000,00",
+    "valorTotal": "7.568,00",
     "valorPorExtenso": "sete mil e oitocentos reais",
     "valorHora": "43,00",
     "valorHoraPorExtenso": "quarenta e três reais",
@@ -22,9 +22,11 @@ const data = {
     "horasPorExtenso": "cento e setenta e seis",
     "numeroParcelas": 4,
     "parcelasPorExtenso": "quatro",
-    "valorParcela": "1.950,00",
+    "parcelado": true,
+    "tipoParcelamento": "mensal",
+    "valorParcela": "1.892,00",
     "valorParcelaPorExtenso": "mil novecentos e cinquenta reais",
-    "diaVencimento": "quartas-feiras",
+    "diaVencimento": "20",
     "dataPrimeiroVencimento": "22 de abril de 2025",
     "prazoEntrega": "45 (quarenta e cinco) dias corridos",
     "dadosPagamento": {
@@ -33,7 +35,7 @@ const data = {
       "codigoBanco": "033",
       "titular": "Diego Antonio da Silva"
     },
-    "localForo": "a"
+    "localForo": "Caruaru - PE"
   }
 };
 module.exports = data;
